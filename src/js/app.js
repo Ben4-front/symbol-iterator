@@ -1,29 +1,13 @@
-import Team from './team.js';
+// src/js/app.js
 
-const team = new Team();
+import Team from './team';
 
-// Пример персонажей
-const char1 = {
-  name: 'Лучник',
-  type: 'Bowman',
-  health: 50,
-  level: 1,
-  attack: 40,
-  defence: 10,
-};
+// Создаем экземпляр команды
+const myTeam = new Team();
 
-const char2 = {
-  name: 'Маг',
-  type: 'Magician',
-  health: 60,
-  level: 2,
-  attack: 30,
-  defence: 20,
-};
-
-team.add(char1);
-team.add(char2);
-
-for (const character of team) {
+// Теперь мы можем использовать цикл for...of для перебора персонажей в команде,
+// потому что мы реализовали Symbol.iterator.
+console.log('Персонажи в команде:');
+for (const character of myTeam) {
   console.log(character);
 }
