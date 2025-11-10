@@ -1,5 +1,3 @@
-// src/js/Team.js
-
 export default class Team {
   constructor() {
     this.characters = [
@@ -32,14 +30,31 @@ export default class Team {
 
   /**
    * Реализация итератора для класса Team.
-   * Это генератор, который будет по одному "выдавать" (yield)
-   * персонажей из массива this.characters.
+   * Метод должен вернуть объект с методом next().
    */
-  *[Symbol.iterator]() {
-    // Перебираем всех персонажей в команде
-    for (const character of this.characters) {
-      // и "выдаем" их по одному
-      yield character;
-    }
+  [Symbol.iterator]() {
+    let currentIndex = 0;
+    const characters = this.characters; // Сохраняем ссылку на массив
+
+    // Возвращаем объект итератора
+    return {
+      // Метод next(), который будет вызываться на каждой итерации
+      next() {
+        // Проверяем, есть ли еще элементы для перебора
+        if (currentIndex < characters.length) {
+          // Если есть, возвращаем следующий элемент
+          return {
+            value: characters[currentIndex++], // Возвращаем значение и увеличиваем индекс
+            done: false, // Итерация не закончена
+          };
+        }
+        
+        // Если элементов больше нет
+        return {
+          value: undefined, // Значения больше нет
+          done: true, // Итерация закончена
+        };
+      },
+    };
   }
 }
